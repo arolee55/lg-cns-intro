@@ -1,0 +1,270 @@
+:root {
+  --surface: #1f2933;
+  --text: #f7fbff;
+  --muted: #a7b4c3;
+  --digit: #e7edf3;
+  --digit-text: #19212a;
+  --utility: #d7e6e2;
+  --utility-text: #17332f;
+  --operator: #f5bf4f;
+  --operator-text: #2b2108;
+  --equals: #e96f5f;
+  --equals-text: #2d0d08;
+  --focus: #67d4c4;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  background: linear-gradient(135deg, #f4f0e8 0%, #dbe7ea 48%, #f7d7c7 100%);
+}
+
+button,
+output {
+  font: inherit;
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.experience {
+  width: min(100%, 960px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 390px);
+  align-items: center;
+  gap: 40px;
+}
+
+.intro {
+  color: #19212a;
+}
+
+.intro__image {
+  width: min(100%, 280px);
+  height: auto;
+  display: block;
+  margin: 0 0 26px;
+  filter: drop-shadow(0 18px 28px rgba(31, 41, 51, 0.16));
+}
+
+.intro__eyebrow {
+  margin: 0 0 10px;
+  color: #6b3f21;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.intro h1 {
+  max-width: 12em;
+  margin: 0;
+  color: #17212d;
+  font-size: 2.35rem;
+  line-height: 1.14;
+  letter-spacing: 0;
+}
+
+.intro__text {
+  max-width: 34rem;
+  margin: 16px 0 0;
+  color: #334553;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.calculator {
+  width: min(100%, 390px);
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 24px 70px rgba(27, 34, 40, 0.28);
+}
+
+.calculator__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 4px 14px;
+}
+
+.calculator__header h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 750;
+  letter-spacing: 0;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: var(--focus);
+  box-shadow: 0 0 0 5px rgba(103, 212, 196, 0.12);
+}
+
+.display {
+  min-height: 128px;
+  display: grid;
+  align-content: end;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 20px 18px;
+  border-radius: 8px;
+  background: #111820;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.display__history {
+  min-height: 1.4em;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: right;
+  word-break: break-all;
+}
+
+.display__value {
+  width: 100%;
+  display: block;
+  color: var(--text);
+  font-size: 3.75rem;
+  font-weight: 780;
+  line-height: 1;
+  text-align: right;
+  letter-spacing: 0;
+  word-break: break-all;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.key {
+  min-width: 0;
+  aspect-ratio: 1 / 1;
+  border: 0;
+  border-radius: 8px;
+  color: var(--digit-text);
+  background: var(--digit);
+  font-size: 1.35rem;
+  font-weight: 760;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    filter 140ms ease;
+  box-shadow: inset 0 -3px 0 rgba(17, 24, 32, 0.13);
+}
+
+.key:hover {
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+}
+
+.key:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 0 rgba(17, 24, 32, 0.18);
+}
+
+.key:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.key--wide {
+  aspect-ratio: auto;
+  grid-column: span 2;
+}
+
+.key--utility {
+  color: var(--utility-text);
+  background: var(--utility);
+}
+
+.key--operator {
+  color: var(--operator-text);
+  background: var(--operator);
+}
+
+.key--equals {
+  color: var(--equals-text);
+  background: var(--equals);
+}
+
+@media (max-width: 420px) {
+  .page-shell {
+    padding: 14px;
+  }
+
+  .experience {
+    gap: 20px;
+  }
+
+  .intro h1 {
+    font-size: 1.7rem;
+  }
+
+  .intro__text {
+    font-size: 0.95rem;
+  }
+
+  .calculator {
+    padding: 14px;
+  }
+
+  .keys {
+    gap: 8px;
+  }
+
+  .key {
+    font-size: 1.15rem;
+  }
+
+  .display__value {
+    font-size: 2.7rem;
+  }
+}
+
+@media (max-width: 780px) {
+  .page-shell {
+    align-items: start;
+  }
+
+  .experience {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .intro {
+    width: min(100%, 390px);
+    text-align: center;
+  }
+
+  .intro__image {
+    margin-inline: auto;
+  }
+
+  .intro h1,
+  .intro__text {
+    max-width: none;
+  }
+}
