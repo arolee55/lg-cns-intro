@@ -1,486 +1,70 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LG CNS 소개</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;
-      color: #1f2430;
-      background: #f5f7fb;
-      line-height: 1.6;
-    }
-
-    button,
-    select {
-      font: inherit;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .hero {
-      padding: 72px 24px 64px;
-      color: #ffffff;
-      background:
-        linear-gradient(135deg, rgba(165, 0, 52, 0.96), rgba(86, 35, 125, 0.92)),
-        radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.24), transparent 28%);
-    }
-
-    .hero-inner,
-    .content,
-    .footer-inner {
-      width: min(100%, 1040px);
-      margin: 0 auto;
-    }
-
-    .eyebrow {
-      margin: 0 0 12px;
-      font-size: 0.92rem;
-      font-weight: 700;
-      letter-spacing: 0;
-      text-transform: uppercase;
-      opacity: 0.88;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2.4rem, 7vw, 4.8rem);
-      line-height: 1;
-      letter-spacing: 0;
-    }
-
-    .lead {
-      max-width: 720px;
-      margin: 22px 0 0;
-      font-size: clamp(1.05rem, 2.4vw, 1.35rem);
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    .content {
-      flex: 1;
-      padding: 40px 24px 48px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      min-height: 220px;
-      padding: 24px;
-      background: #ffffff;
-      border: 1px solid #e3e7ef;
-      border-radius: 8px;
-      box-shadow: 0 14px 32px rgba(31, 36, 48, 0.08);
-    }
-
-    .card h2 {
-      margin: 0 0 14px;
-      color: #a50034;
-      font-size: 1.18rem;
-      letter-spacing: 0;
-    }
-
-    .card p {
-      margin: 0;
-    }
-
-    .card ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-
-    .card li + li {
-      margin-top: 8px;
-    }
-
-    .forecast-section {
-      margin-top: 28px;
-      padding: 28px;
-      background: #ffffff;
-      border: 1px solid #e3e7ef;
-      border-radius: 8px;
-      box-shadow: 0 14px 32px rgba(31, 36, 48, 0.08);
-    }
-
-    .forecast-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      margin-bottom: 22px;
-    }
-
-    .forecast-title {
-      margin: 0;
-      color: #1f2430;
-      font-size: 1.55rem;
-      letter-spacing: 0;
-    }
-
-    .forecast-copy {
-      max-width: 620px;
-      margin: 8px 0 0;
-      color: #5f6878;
-    }
-
-    .forecast-controls {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .forecast-select {
-      min-width: 160px;
-      min-height: 42px;
-      padding: 0 40px 0 14px;
-      color: #1f2430;
-      background: #f8fafd;
-      border: 1px solid #cbd3df;
-      border-radius: 8px;
-    }
-
-    .forecast-button {
-      min-height: 42px;
-      padding: 0 16px;
-      color: #ffffff;
-      background: #a50034;
-      border: 0;
-      border-radius: 8px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .forecast-button:hover,
-    .forecast-button:focus-visible {
-      background: #87002b;
-    }
-
-    .forecast-button:disabled {
-      cursor: wait;
-      opacity: 0.72;
-    }
-
-    .forecast-status {
-      min-height: 24px;
-      margin: 0 0 16px;
-      color: #5f6878;
-      font-size: 0.95rem;
-    }
-
-    .forecast-grid {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(116px, 1fr));
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 2px;
-    }
-
-    .forecast-day {
-      min-width: 116px;
-      padding: 16px;
-      background: #f8fafd;
-      border: 1px solid #e3e7ef;
-      border-radius: 8px;
-    }
-
-    .forecast-date {
-      margin: 0;
-      color: #5f6878;
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    .forecast-icon {
-      margin: 10px 0 8px;
-      font-size: 2rem;
-      line-height: 1;
-    }
-
-    .forecast-summary {
-      min-height: 45px;
-      margin: 0 0 12px;
-      color: #1f2430;
-      font-weight: 700;
-    }
-
-    .forecast-temp {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      color: #343b49;
-      font-size: 0.95rem;
-    }
-
-    .forecast-rain {
-      margin: 8px 0 0;
-      color: #5f6878;
-      font-size: 0.92rem;
-    }
-
-    .footer {
-      padding: 24px;
-      background: #ffffff;
-      border-top: 1px solid #e3e7ef;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
-      color: #5f6878;
-      font-size: 0.95rem;
-    }
-
-    .official-link {
-      display: inline-flex;
-      align-items: center;
-      min-height: 42px;
-      padding: 0 16px;
-      color: #ffffff;
-      background: #a50034;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .official-link:hover,
-    .official-link:focus-visible {
-      background: #87002b;
-    }
-
-    @media (max-width: 820px) {
-      .hero {
-        padding: 56px 20px 48px;
-      }
-
-      .content {
-        padding: 28px 20px 36px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .card {
-        min-height: auto;
-      }
-
-      .forecast-section {
-        padding: 22px;
-      }
-
-      .forecast-controls {
-        width: 100%;
-      }
-
-      .forecast-select,
-      .forecast-button {
-        flex: 1 1 160px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <main class="page">
-    <section class="hero">
-      <div class="hero-inner">
-        <p class="eyebrow">Digital Transformation Partner</p>
-        <h1>LG CNS</h1>
-        <p class="lead">
-          LG CNS는 AI, 클라우드, 스마트팩토리, 스마트물류, 컨설팅 등 기업의 디지털 전환을 돕는 LG 계열 IT 서비스 기업입니다.
-        </p>
-      </div>
-    </section>
-
-    <section class="content" aria-label="LG CNS 소개">
-      <div class="cards">
-        <article class="card">
-          <h2>무엇을 하는 회사인가</h2>
-          <p>
-            기업이 더 빠르고 효율적으로 일할 수 있도록 IT 시스템을 설계하고 구축하며,
-            데이터와 AI를 활용한 업무 혁신 서비스를 제공합니다.
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>사칙연산 계산기</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="experience" aria-label="계산기 소개와 실행 영역">
+        <section class="intro" aria-labelledby="intro-title">
+          <img
+            class="intro__image"
+            src="calculator-illustration.svg"
+            width="480"
+            height="360"
+            alt="숫자 버튼과 연산 기호가 있는 간단한 계산기 그림"
+          />
+          <p class="intro__eyebrow">Quick Math</p>
+          <h1 id="intro-title">간단한 사칙연산 계산기</h1>
+          <p class="intro__text">
+            덧셈, 뺄셈, 곱셈, 나눗셈을 깔끔하게 처리하는 웹 계산기입니다. 버튼과 키보드 입력을
+            모두 지원해 간단한 계산을 빠르게 끝낼 수 있습니다.
           </p>
-        </article>
+        </section>
 
-        <article class="card">
-          <h2>주요 분야</h2>
-          <ul>
-            <li>AI와 AX 플랫폼</li>
-            <li>클라우드와 IT 인프라</li>
-            <li>스마트팩토리와 스마트물류</li>
-            <li>비즈니스 및 IT 컨설팅</li>
-          </ul>
-        </article>
+        <section class="calculator" aria-label="사칙연산 계산기">
+          <header class="calculator__header">
+            <h2>Calculator</h2>
+            <span class="status-dot" aria-hidden="true"></span>
+          </header>
 
-        <article class="card">
-          <h2>한눈에 보는 특징</h2>
-          <p>
-            제조, 물류, 도시, 고객 경험 등 다양한 산업 현장에 맞춘 디지털 솔루션을 제공하며,
-            기업이 새로운 기술을 실제 업무 성과로 연결하도록 지원합니다.
-          </p>
-        </article>
-      </div>
+          <section class="display" aria-live="polite">
+            <div class="display__history" id="history">&nbsp;</div>
+            <output class="display__value" id="display">0</output>
+          </section>
 
-      <section class="forecast-section" aria-labelledby="forecast-title">
-        <div class="forecast-header">
-          <div>
-            <h2 class="forecast-title" id="forecast-title">서울시 1주일 일기예보</h2>
-            <p class="forecast-copy">
-              지역을 선택하면 외부 날씨 API를 호출해 최신 7일 예보를 조회합니다.
-            </p>
-          </div>
+          <section class="keys" aria-label="계산기 버튼">
+            <button class="key key--utility" type="button" data-action="clear">AC</button>
+            <button class="key key--utility" type="button" data-action="delete" aria-label="한 자리 지우기">&#9003;</button>
+            <button class="key key--utility" type="button" data-action="toggle-sign" aria-label="양수 음수 전환">&plusmn;</button>
+            <button class="key key--operator" type="button" data-operator="divide" aria-label="나누기">&divide;</button>
 
-          <div class="forecast-controls">
-            <label for="forecast-location">지역</label>
-            <select class="forecast-select" id="forecast-location">
-              <option value="seoul" selected>서울시</option>
-            </select>
-            <button class="forecast-button" id="forecast-refresh" type="button">예보 조회</button>
-          </div>
-        </div>
+            <button class="key" type="button" data-number="7">7</button>
+            <button class="key" type="button" data-number="8">8</button>
+            <button class="key" type="button" data-number="9">9</button>
+            <button class="key key--operator" type="button" data-operator="multiply" aria-label="곱하기">&times;</button>
 
-        <p class="forecast-status" id="forecast-status" aria-live="polite">예보를 불러오는 중입니다.</p>
-        <div class="forecast-grid" id="forecast-grid" aria-label="7일 일기예보"></div>
+            <button class="key" type="button" data-number="4">4</button>
+            <button class="key" type="button" data-number="5">5</button>
+            <button class="key" type="button" data-number="6">6</button>
+            <button class="key key--operator" type="button" data-operator="subtract" aria-label="빼기">&minus;</button>
+
+            <button class="key" type="button" data-number="1">1</button>
+            <button class="key" type="button" data-number="2">2</button>
+            <button class="key" type="button" data-number="3">3</button>
+            <button class="key key--operator" type="button" data-operator="add" aria-label="더하기">+</button>
+
+            <button class="key key--wide" type="button" data-number="0">0</button>
+            <button class="key" type="button" data-action="decimal" aria-label="소수점">.</button>
+            <button class="key key--equals" type="button" data-action="calculate" aria-label="계산하기">=</button>
+          </section>
+        </section>
       </section>
-    </section>
+    </main>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        <span>참고: LG CNS 공식 글로벌 사이트 · 날씨: Open-Meteo Forecast API</span>
-        <a class="official-link" href="https://www.lgcns.com/en" target="_blank" rel="noopener noreferrer">
-          공식 사이트 보기
-        </a>
-      </div>
-    </footer>
-  </main>
-
-  <script>
-    const locations = {
-      seoul: {
-        name: "서울시",
-        latitude: 37.5665,
-        longitude: 126.9780
-      }
-    };
-
-    const weatherCodes = {
-      0: ["맑음", "☀️"],
-      1: ["대체로 맑음", "🌤️"],
-      2: ["부분적으로 흐림", "⛅"],
-      3: ["흐림", "☁️"],
-      45: ["안개", "🌫️"],
-      48: ["서리 안개", "🌫️"],
-      51: ["약한 이슬비", "🌦️"],
-      53: ["이슬비", "🌦️"],
-      55: ["강한 이슬비", "🌧️"],
-      61: ["약한 비", "🌦️"],
-      63: ["비", "🌧️"],
-      65: ["강한 비", "🌧️"],
-      71: ["약한 눈", "🌨️"],
-      73: ["눈", "🌨️"],
-      75: ["강한 눈", "❄️"],
-      80: ["약한 소나기", "🌦️"],
-      81: ["소나기", "🌧️"],
-      82: ["강한 소나기", "⛈️"],
-      95: ["뇌우", "⛈️"],
-      96: ["우박 동반 뇌우", "⛈️"],
-      99: ["강한 우박 동반 뇌우", "⛈️"]
-    };
-
-    const locationSelect = document.querySelector("#forecast-location");
-    const refreshButton = document.querySelector("#forecast-refresh");
-    const statusText = document.querySelector("#forecast-status");
-    const forecastGrid = document.querySelector("#forecast-grid");
-
-    function formatDate(dateText) {
-      return new Intl.DateTimeFormat("ko-KR", {
-        month: "short",
-        day: "numeric",
-        weekday: "short"
-      }).format(new Date(`${dateText}T00:00:00+09:00`));
-    }
-
-    function getWeatherLabel(code) {
-      return weatherCodes[code] || ["날씨 정보", "🌡️"];
-    }
-
-    function buildForecastUrl(location) {
-      const params = new URLSearchParams({
-        latitude: location.latitude,
-        longitude: location.longitude,
-        daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max",
-        timezone: "Asia/Seoul",
-        forecast_days: "7"
-      });
-
-      return `https://api.open-meteo.com/v1/forecast?${params.toString()}`;
-    }
-
-    function renderForecast(daily) {
-      forecastGrid.innerHTML = daily.time.map((dateText, index) => {
-        const [summary, icon] = getWeatherLabel(daily.weather_code[index]);
-        const maxTemp = Math.round(daily.temperature_2m_max[index]);
-        const minTemp = Math.round(daily.temperature_2m_min[index]);
-        const rain = daily.precipitation_probability_max[index] ?? 0;
-
-        return `
-          <article class="forecast-day">
-            <p class="forecast-date">${formatDate(dateText)}</p>
-            <div class="forecast-icon" aria-hidden="true">${icon}</div>
-            <p class="forecast-summary">${summary}</p>
-            <div class="forecast-temp">
-              <span>최고 ${maxTemp}°</span>
-              <span>최저 ${minTemp}°</span>
-            </div>
-            <p class="forecast-rain">강수 확률 ${rain}%</p>
-          </article>
-        `;
-      }).join("");
-    }
-
-    async function loadForecast() {
-      const location = locations[locationSelect.value];
-      refreshButton.disabled = true;
-      statusText.textContent = `${location.name} 예보를 실시간으로 조회하는 중입니다.`;
-
-      try {
-        const response = await fetch(buildForecastUrl(location));
-
-        if (!response.ok) {
-          throw new Error("날씨 API 응답이 올바르지 않습니다.");
-        }
-
-        const data = await response.json();
-        renderForecast(data.daily);
-        statusText.textContent = `${location.name} 기준 최신 7일 예보입니다.`;
-      } catch (error) {
-        forecastGrid.innerHTML = "";
-        statusText.textContent = "일기예보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
-      } finally {
-        refreshButton.disabled = false;
-      }
-    }
-
-    refreshButton.addEventListener("click", loadForecast);
-    locationSelect.addEventListener("change", loadForecast);
-    loadForecast();
-  </script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
